@@ -24,3 +24,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.to-sun {
+  animation-name: to-sun;
+  animation-duration: 0.5s;
+}
+
+.to-moon {
+  animation-name: to-moon;
+  animation-duration: 0.5s;
+}
+
+@keyframes to-moon {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100;
+  }
+}
+
+@keyframes to-sun {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100;
+  }
+}
