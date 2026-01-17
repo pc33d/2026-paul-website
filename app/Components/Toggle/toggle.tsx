@@ -3,19 +3,23 @@ import Image from 'next/image'
 
 interface ToggleProps {
   size: number;
+  onClick: (active: boolean) => void;
 }
 
-export default function Toggle({size}: ToggleProps) {
+export default function Toggle({size, onClick}: ToggleProps) {
   const [active, setActive] = useState(true);
 
   return (
     <button
-      onClick={() => setActive(!active)}
+      onClick={() => {
+        setActive(!active)
+        onClick(!active)
+      }}
       style={{
         width: `calc(12rem * ${size})`, 
         height: `calc(5rem * ${size})`,
       }}
-      className={`relative flex items-center p-2 w-48 h-20 m-1.25 outline-5 rounded-full transition-all duration-300 ${
+      className={`relative flex items-center p-2 w-48 h-20 border-5 rounded-full transition-all duration-300 ${
         active ? "bg-cyan-400" : "bg-gray-400"
       }`}
     >
