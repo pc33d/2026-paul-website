@@ -1,26 +1,42 @@
 import { useState } from "react"
 import Image from 'next/image'
 
-import Sun from "../sun.svg"
+interface ToggleProps {
+  size: string;
+}
 
-export default function Toggle() {
-  const [active, setActive] = useState(true)
+export default function Toggle({size}: ToggleProps) {
+  const [active, setActive] = useState(true);
 
   return (
-    <button 
-      style={{ borderRadius: "12rem", background: active ? "#00E6FF" : "#BABABA"}}
-      className={`flex justify-between items-center p-3 border-5 transition-all duration-200`}
-      // className="grid grid-cols-2 gap-7 p-3 border-5 transition-all duration-200"
+    <button
       onClick={() => setActive(!active)}
+      className={`relative flex items-center p-2 w-48 h-20 m-1.25 outline-5 rounded-full transition-all duration-300 ${
+        active ? "bg-cyan-400" : "bg-gray-400"
+      }`}
     >
-      <div className={`bg-white border-5 rounded-full w-20 h-20 transition-all duration-200 ${active ? "translate-x-full" : "translate-x-0"}`}></div>
-      <Image
-        className={`transition-all duration-200 ${active ? "-translate-x-full to-sun" : "translate-x-0 to-moon"}`}
-        src={active ? "assets/sun.svg" : "assets/moon.svg"}
-        width={80}
-        height={80}
-        alt="Picture of the author"
+      {/* The Moving Handle */}
+      <div
+        className={`absolute bg-white rounded-full w-16 h-16 border-5 transition-transform duration-300 ${
+          active ? "translate-x-0" : "translate-x-28"
+        }`}
       />
+
+      {/* The Icons */}
+      <div className="flex justify-between w-full z-10 pointer-events-none">
+        <Image 
+          src="/assets/moon.svg" 
+          width={70} height={70} 
+          className={`transition-opacity -ml-1 ${!active ? "opacity-100" : "opacity-0"}`} 
+          alt="moon"
+        />
+        <Image 
+          src="/assets/sun.svg" 
+          width={70} height={70} 
+          className={`transition-opacity -ml-1 ${active ? "opacity-100" : "opacity-0"}`} 
+          alt="sun"
+        />
+      </div>
     </button>
-  )
+  );
 }
